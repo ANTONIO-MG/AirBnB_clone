@@ -8,3 +8,18 @@ and date and time respectively
 
 This model will be used to manipulate the console
 """
+
+import cmd, sys
+
+class console(cmd.Cmd):
+    """
+    the commandline interface that will execute the Air B&B project
+    """
+    
+    intro = "Welcome to Air B&B CML Interface, Type help or ? to list commands.\n"
+    prompt = '(AirB&B)'
+    file = None
+    
+    
+if __name__ == '__main__':
+    console().cmdloop()

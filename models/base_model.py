@@ -30,13 +30,20 @@ class BaseModel():
         initialisation of the baser class
         """
         self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        created_at = datetime.now()
+        updated_at = datetime.now()
+        self.created_at = created_at.isoformat()
+        self.updated_at = updated_at.isoformat()
         
-    # def save(self):
+    def save():
+        """
+        update the updated_at attribute
+        """
+        updated_at = datetime.now()
+        return updated_at.isoformat()
         
     
-    def to_dict(self, object):
+    def to_dict(self):
         """
         takes a python and converts it to a dictionary
         
@@ -46,7 +53,7 @@ class BaseModel():
         return:
             returns the dictionary representation of the object
         """
-        pass
+        return (self.__dict__)
         
     
     
@@ -57,5 +64,10 @@ class BaseModel():
         returns:
             the string representation of the BaseModel
         """
-        return "{} ({}) {}".format(BaseModel, self.id, self.__dict__)
+        return ("{} - ({}) - {}".format(self, self.id, self.__dict__))
+    
+    # code ends here _______________________________________________
+    
+    
+        
         
