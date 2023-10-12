@@ -25,22 +25,31 @@ class BaseModel():
     """
     
     
-    def __init__(self, id=None, created_at=None, updated_at=None):
+    def __init__(self, *args, **kwargs):
         """
-        initialisation of the baser class
+        Initialization of the base class
         """
-        self.id = str(uuid.uuid4())
-        created_at = datetime.now()
-        updated_at = datetime.now()
-        self.created_at = created_at.isoformat()
-        self.updated_at = updated_at.isoformat()
+        if not kwargs:
+            self.id = str(uuid.uuid4())
+            created_at = datetime.now()
+            updated_at = datetime.now()
+            self.created_at = created_at.isoformat()
+            self.updated_at = updated_at.isoformat()
+        else:
+            for key, value in kwargs.items():
+                if (key == "__class__"):
+                    pass
+                elif key == "created_at" or key == "updated_at":
+                    setattr(self, key, datetime.fromisoformat(value))
+                else:
+                    setattr(self, key, value)
         
-    def save():
+    def save(self):
         """
         update the updated_at attribute
         """
-        updated_at = datetime.now()
-        return updated_at.isoformat()
+        self.updated_at = datetime.now()
+        return self.updated_at.isoformat()
         
     
     def to_dict(self):
@@ -53,21 +62,20 @@ class BaseModel():
         return:
             returns the dictionary representation of the object
         """
-        return (self.__dict__)
+        self.__dict__["__class__"] = self.__class__.__name__
+        return self.__dict__
         
-    
     
     def __str__(self):
         """
-        the string representation
+        the string representation of the object
         
         returns:
             the string representation of the BaseModel
         """
-        return ("{} - ({}) - {}".format(self, self.id, self.__dict__))
+        return "[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__)
+    
     
     # code ends here _______________________________________________
-    
-    
-        
+
         
