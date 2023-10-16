@@ -11,7 +11,7 @@ This model will be used to manipulate the console
 
 import uuid
 from datetime import datetime
-import json
+# from models import storage
 
 class BaseModel():
     """
@@ -33,8 +33,9 @@ class BaseModel():
             self.id = str(uuid.uuid4())
             created_at = datetime.now()
             updated_at = datetime.now()
-            self.created_at = created_at.isoformat()
-            self.updated_at = updated_at.isoformat()
+            self.created_at = created_at
+            self.updated_at = updated_at
+            # storage.new()
         else:
             for key, value in kwargs.items():
                 if (key == "__class__"):
@@ -48,21 +49,22 @@ class BaseModel():
         """
         update the updated_at attribute
         """
+        # storage.save()
         self.updated_at = datetime.now()
-        return self.updated_at.isoformat()
+    
         
     
     def to_dict(self):
         """
         takes a python and converts it to a dictionary
         
-        args:
-            object: the object to convert to a dictionary
-        
         return:
             returns the dictionary representation of the object
         """
         self.__dict__["__class__"] = self.__class__.__name__
+        self.__dict__["updated_at"] = self.updated_at.isoformat()
+        self.__dict__["created_at"] = self.created_at.isoformat()
+        self.__dict__["id"] = str(self.id)
         return self.__dict__
         
     
@@ -78,4 +80,26 @@ class BaseModel():
     
     # code ends here _______________________________________________
 
-        
+
+# my_model = BaseModel()
+# my_model.name = "My First Model"
+# my_model.my_number = 89
+# print(my_model)
+# my_model.save()
+# print(my_model)
+# my_model_json = my_model.to_dict()
+# print(my_model_json)
+# print("JSON of my_model:")
+# for key in my_model_json.keys():
+#     print("\t{}: ({}) - {}".format(key, type(my_model_json[key]), my_model_json[key])) 
+
+# checkers ________________________________________________________________
+
+class BaseModel(BaseModel):
+    """Doc
+    """
+
+    def save(self):
+        """Doc
+        """
+        pass
