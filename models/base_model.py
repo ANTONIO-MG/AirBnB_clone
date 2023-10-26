@@ -55,11 +55,14 @@ class BaseModel():
         return:
             returns the dictionary representation of the object
         """
-        self.__dict__["__class__"] = self.__class__.__name__
-        self.__dict__["updated_at"] = str(self.updated_at.isoformat())
-        self.__dict__["created_at"] = str(self.created_at.isoformat())
-        self.__dict__["id"] = str(self.id)
-        return self.__dict__
+        new_dict = self.__dict__
+        if "updated_at" in new_dict:
+            new_dict["updated_at"] = new_dict["updated_at"].isoformat()
+        if "created_at" in new_dict:
+            new_dict["created_at"] = new_dict["created_at"].isoformat()
+        new_dict["__class__"] = self.__class__.__name__
+        # self.__dict__["id"] = str(self.id)
+        return new_dict
 
     def __str__(self):
         """
@@ -69,3 +72,4 @@ class BaseModel():
             the string representation of the BaseModel
         """
         return f"[{type(self).__name__}] ({self.id}) {self.__dict__}"
+    
