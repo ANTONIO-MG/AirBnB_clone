@@ -47,7 +47,6 @@ class BaseModel():
         update the updated_at attribute
         """
         self.updated_at = datetime.now()
-        self.updated_at.isoformat()
 
     def to_dict(self):
         """
