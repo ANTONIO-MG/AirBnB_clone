@@ -51,9 +51,6 @@ class BaseModel():
     def to_dict(self):
         """
         takes a python and converts it to a dictionary
-
-        return:
-            returns the dictionary representation of the object
         """
         new_dict = self.__dict__
         if "updated_at" in new_dict:
@@ -67,9 +64,5 @@ class BaseModel():
     def __str__(self):
         """
         the string representation of the object
-
-        returns:
-            the string representation of the BaseModel
         """
         return f"[{type(self).__name__}] ({self.id}) {self.__dict__}"
-    
