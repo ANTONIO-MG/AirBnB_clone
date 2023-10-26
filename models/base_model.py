@@ -11,7 +11,6 @@ This model will be used to manipulate the console
 
 import uuid
 from datetime import datetime
-# from models import storage
 
 
 class BaseModel():
@@ -34,7 +33,6 @@ class BaseModel():
             updated_at = datetime.now()
             self.created_at = created_at
             self.updated_at = updated_at
-            # storage.new()
         else:
             for key, value in kwargs.items():
                 if (key == "__class__"):
@@ -48,9 +46,8 @@ class BaseModel():
         """
         update the updated_at attribute
         """
-        # storage.save()
         self.updated_at = datetime.now()
-        return self.updated_at.isoformat()
+        self.updated_at.isoformat()
 
     def to_dict(self):
         """
@@ -60,8 +57,8 @@ class BaseModel():
             returns the dictionary representation of the object
         """
         self.__dict__["__class__"] = self.__class__.__name__
-        self.__dict__["updated_at"] = self.updated_at.isoformat()
-        self.__dict__["created_at"] = self.created_at.isoformat()
+        self.__dict__["updated_at"] = str(self.updated_at.isoformat())
+        self.__dict__["created_at"] = str(self.created_at.isoformat())
         self.__dict__["id"] = str(self.id)
         return self.__dict__
 
